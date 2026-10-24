@@ -1,0 +1,36 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"value": "ADF-PureYog"
+		},
+		"LS_ADLS_properties_typeProperties_url": {
+			"value": "https://adlspureyoghospital.dfs.core.windows.net/"
+		},
+		"LS_AzureDatabricks_properties_typeProperties_existingClusterId": {
+			"value": "1023-111847-1totpa57"
+		},
+		"LS_AzureSqlDatabase_properties_typeProperties_server": {
+			"value": "pureyoghospital-server.database.windows.net"
+		},
+		"LS_AzureSqlDatabase_properties_typeProperties_database": {
+			"value": "SQL-DB-PureYogHospital"
+		},
+		"LS_AzureSqlDatabase_properties_typeProperties_userName": {
+			"value": "Safalarora"
+		},
+		"LS_KeyVault_properties_typeProperties_baseUrl": {
+			"value": "https://PureYogHospital-Keyvalut.vault.azure.net/"
+		},
+		"LS_PostgreSQL_properties_typeProperties_server": {
+			"value": "ep-bitter-shape-b3mpd5iz-pooler.c-4.ap-southeast-1.aws.neon.tech"
+		},
+		"LS_PostgreSQL_properties_typeProperties_database": {
+			"value": "neondb"
+		},
+		"LS_PostgreSQL_properties_typeProperties_username": {
+			"value": "neondb_owner"
+		}
+	}
+}

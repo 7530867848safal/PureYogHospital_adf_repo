@@ -1,9 +1,9 @@
 {
-	"name": "PL_SOURCE_TO_SILVER",
+	"name": "PL_Source_To_Silver_Main",
 	"properties": {
 		"activities": [
 			{
-				"name": "READ Source Table List",
+				"name": "Read Source Table List",
 				"type": "Lookup",
 				"dependsOn": [],
 				"policy": {
@@ -36,7 +36,7 @@
 				"type": "ForEach",
 				"dependsOn": [
 					{
-						"activity": "READ Source Table List",
+						"activity": "Read Source Table List",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -74,6 +74,10 @@
 									"table_id": {
 										"value": "@item().table_id",
 										"type": "Expression"
+									},
+									"adf_run_id": {
+										"value": "@pipeline().parameters.adf_run_id",
+										"type": "Expression"
 									}
 								}
 							}
@@ -99,7 +103,7 @@
 									{
 										"type": "Query",
 										"text": {
-											"value": "INSERT into ctrl.audit_log(adf_run_id, table_id,stage,status,start_time)\n    VALUES('a1',@{item().table_id},'Source_To_Silver','In_Progress',SYSUTCDATETIME())",
+											"value": "INSERT into ctrl.audit_log(adf_run_id, table_id,stage,status,start_time)\n    VALUES(@{pipeline().parameters.adf_run_id},@{item().table_id},'Source_To_Silver','IN_PROGRESS', SYSUTCDATETIME())",
 											"type": "Expression"
 										}
 									}
@@ -135,7 +139,7 @@
 									{
 										"type": "Query",
 										"text": {
-											"value": "INSERT into ctrl.audit_log(adf_run_id, table_id,stage,status,start_time)\n    VALUES('a1',@{item().table_id},'Source_To_Silver','In_Progress',SYSUTCDATETIME())",
+											"value": "UPDATE ctrl.audit_log SET STATUS = 'FAILED', end_time = SYSUTCDATETIME() where adf_run_id = @{pipeline().parameters.adf_run_id} and table_id = @{item().table_id}",
 											"type": "Expression"
 										}
 									}
@@ -151,11 +155,10 @@
 			"source_system": {
 				"type": "String",
 				"defaultValue": "neon_postgres"
-			}
-		},
-		"variables": {
-			"tes": {
-				"type": "String"
+			},
+			"adf_run_id": {
+				"type": "string",
+				"defaultValue": "a2"
 			}
 		},
 		"annotations": []
